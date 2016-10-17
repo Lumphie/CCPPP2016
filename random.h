@@ -1,3 +1,5 @@
+// Copyright GS van Doorn
+
 #ifndef MATH_H
 #include<math.h>
 #endif
