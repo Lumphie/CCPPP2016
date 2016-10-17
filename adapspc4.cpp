@@ -7,7 +7,7 @@
 #include<cstdlib>
 #include<cstring>
 #include<list>
-#include"kewe_random.h"
+#include"random.h"
 
 using namespace std;
 
