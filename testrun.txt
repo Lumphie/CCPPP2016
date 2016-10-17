@@ -1,0 +1,17 @@
+alleles 1 1 1
+histbin 0.05 0.2 0.2
+seed 123
+pop0 100
+type0 0.6 0.0 0.0
+end 1000
+sc 0.4
+se 0.6
+sk 1.2
+c 0.001
+sm 0.2
+sv 0.02
+sq 1.0
+eta 1.0
+b 4.0
+output 1 testbestand
+haploid 1
