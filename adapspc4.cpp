@@ -1,3 +1,5 @@
+// Copyright GS van Doorn
+
 #include<iostream>
 #include<fstream>
 #include<iomanip>
