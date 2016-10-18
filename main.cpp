@@ -27,10 +27,11 @@ class indiv
 {
     private:
         double x,p,q;
-        vector<double> X;
+        vector<double>X;
         vector<double>P;
         vector<double>Q;
         double a;
+
     public:
         indiv()
         {
@@ -100,12 +101,28 @@ class indiv
             }
             if(diploid)
             {
+                if(Nx < 2)
+                        throw invalid_argument("Cannot do diploid with 1 x locus");
+                if(Np < 2)
+                        throw invalid_argument("Cannot do diploid with 1 p locus");
+                if(Nq < 2)
+                        throw invalid_argument("Cannot do diploid with 1 q locus");
+
                 for(i=0;i<=Nx-2;i+=2)
                 {
-                    if(Uniform()<0.5) X[i]=m.X[i];
-                    else X[i]=m.X[i+1];
-                    if(Uniform()<0.5) X[i+1]=f.X[i];
-                    else X[i+1]=f.X[i+1];
+                    assert(i>=0);
+                    // Pick one of each 2 mother's loci
+                    if(Uniform()<0.5)
+                        X[i]=m.X[i];
+                    else
+                        X[i]=m.X[i+1];
+                    // Pick one of each 2 father's loci
+                    if(Uniform()<0.5)
+                        X[i+1]=f.X[i];
+                    else
+                        X[i+1]=f.X[i+1];
+
+                    // Mutate loci????????????
                     X[i]+=Normal(0.0,sv);
                     X[i+1]+=Normal(0.0,sv);
                     x+=X[i]+X[i+1];
