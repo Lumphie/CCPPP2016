@@ -347,6 +347,11 @@ void output(bigint t, vector<vector<double>> &histX, vector<vector<double>> &his
     vector<double> histPGen;
     vector<double> histQGen;
 
+
+    assert(histXGen.empty());
+    assert(histPGen.empty());
+    assert(histQGen.empty());
+
     for(j=0;j<histw;j++)
     {
         out<<","<<histx[j]/maxx;
@@ -508,11 +513,11 @@ void readparameters(char *filename)
     return;
 }
 
+// Count number of borders (from 0 to >0 or from >0 to 0) in a histogram
 int countBorders(const vector<double> &histogram)
 {
-    bool empty = histogram.empty();
+    if (histogram.empty()) throw std::invalid_argument("Histogram is empty");
 
-    if (empty) throw std::invalid_argument("Histogram is empty");
     int size = static_cast<int>(histogram.size());
     int numOfBorders{0};
     for (int i = 0; i<size; ++i)
@@ -531,8 +536,15 @@ int countBorders(const vector<double> &histogram)
     return numOfBorders;
 }
 
+// calculates lineages (borders / 2) and the trait with the most lineages becomes
+// the number of lineages for that generation
 int countLineagesForGen(const int t, const vector<vector<double>> &histX, const vector<vector<double>> &histP, const vector<vector<double>> &histQ)
 {
+    if (t < 0) throw std::invalid_argument("Time can't be negative");
+    if (histX.empty()) throw std::invalid_argument("HistX is empty");
+    if (histP.empty()) throw std::invalid_argument("HistP is empty");
+    if (histQ.empty()) throw std::invalid_argument("HistQ is empty");
+
     int xBorders = countBorders(histX[t]);
     int pBorders = countBorders(histP[t]);
     int maxBorders = countBorders(histQ[t]);
@@ -541,8 +553,13 @@ int countLineagesForGen(const int t, const vector<vector<double>> &histX, const 
     return maxBorders / 2;
 }
 
+//output all number of lineages for all the generations
 void outputLTT(const vector<vector<double>> &histX, const vector<vector<double>> &histP, const vector<vector<double>> &histQ)
 {
+    if (histX.empty()) throw std::invalid_argument("HistX is empty");
+    if (histP.empty()) throw std::invalid_argument("HistP is empty");
+    if (histQ.empty()) throw std::invalid_argument("HistQ is empty");
+
     ofstream LTT("ltt.csv");
 
     for (int i = 0; i < static_cast<int>(histX.size()); ++i)
