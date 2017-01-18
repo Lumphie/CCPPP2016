@@ -1,5 +1,3 @@
-// Copyright GS van Doorn
-
 #include<iostream>
 #include<fstream>
 #include<iomanip>
@@ -388,11 +386,11 @@ void readparameters(char *filename)
 }
 
 
-int main(int argc, char *argv[])
+void main(int argc, char *argv[])
 {	
 	if(argc==1) { cout<<"no parameterfile specified"<<endl; exit(1);}
 	readparameters(argv[1]);
 	initialize();
 	iterate();
-  return 0;
+	return;
 }
